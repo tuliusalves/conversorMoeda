@@ -25,39 +25,14 @@ public class Main {
         int menuResponseInteraction=0;
 
         do {
-            /*
-            String currentCoin= """
-                Digite um dos números para selecionar a moeda atual ou encerrar o programa
-                1 => (USD) Dolar Americano
-                2 => (BRL) Real Brasileiro
-                3 => (EUR) Euro
-                4=>  (JPY) Iene Japonês
-                5=>  (CNY) Yuan chinês 
-                6=>  (CAD) Dolar Canadense
-                7=>  Parar o programa
-                """;
-            System.out.println(currentCoin);*/
-            interaction.currentCoin(menuResponseInteraction);
 
-            menuResponseInteraction= read.nextInt();
+            menuResponseInteraction =interaction.currentCoin();
+
             if (menuResponseInteraction==7){
                 break;
             }
-            /*
-            System.out.println("---------------");
-            String optionConvertion = """
-                Digite um dos números para selecionar qual moeda você deseja converter!
-                1 => (USD) Dolar Americano
-                2 => (BRL) Real Brasileiro
-                3 => (EUR) Euro
-                4=>  (JPY) Iene Japonês
-                5=>  (CNY) Yuan chinês 
-                6=>  (CAD) Dolar Canadense
-                7=>  Parar o programa
-                """;
-            System.out.println(optionConvertion);*/
-            interaction.optionConvertion();
-            toConvertReturnFilterCoins = read.nextInt();
+
+            toConvertReturnFilterCoins = interaction.optionConvertion();
 
             curentReturnFilterCoins =filterCoins.typeCoin(menuResponseInteraction);
 
@@ -72,28 +47,19 @@ public class Main {
 
 
             try {
-            /*
-            ConversorMoeda conversorMoeda = gson.fromJson(json, ConversorMoeda.class);
-            System.out.println("baseCode da moeda: " + conversorMoeda);
-            */
                 Conversor conversor= gson.fromJson(json,Conversor.class);
-                /*
-                System.out.println("Após a conversão");
-                System.out.println(conversor.getConversionRates().getBRL()*100);
-                */
+
                 System.out.println("Moeda atual:"+curentReturnFilterCoins);
                 System.out.println("Moeda que deseja converter:"+filterCoins.typeCoin(toConvertReturnFilterCoins));
                 System.out.println("Valor a ser convertido:"+valueConvert);
                 System.out.println("Valor após a conversão:"+conversor.
                         returnToCoinConversor(toConvertReturnFilterCoins)*valueConvert);
+                System.out.println("------------------------------");
             }catch (JsonParseException e){
                 System.err.println("Erro ao analisar JSON:"+e.getMessage());
             }
 
         }while (menuResponseInteraction<7);
-
-        /*Preciso separar as responsabilidades, criando classes para cada coisa.
-        * Criar uma classe contendo os menus*/
-
+        
     }
 }
