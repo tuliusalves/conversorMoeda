@@ -36,8 +36,8 @@ public class Main {
 
             curentReturnFilterCoins =filterCoins.typeCoin(menuResponseInteraction);
 
-            System.out.println("Digite o valor que deseja converter");
-            valueConvert = read.nextDouble();
+
+            valueConvert = interaction.valueConvert();
 
             String json= api_consumption.getData(curentReturnFilterCoins);
 
@@ -50,9 +50,13 @@ public class Main {
                 Conversor conversor= gson.fromJson(json,Conversor.class);
 
                 System.out.println("Moeda atual:"+curentReturnFilterCoins);
-                System.out.println("Moeda que deseja converter:"+filterCoins.typeCoin(toConvertReturnFilterCoins));
-                System.out.println("Valor a ser convertido:"+valueConvert);
-                System.out.println("Valor após a conversão:"+conversor.
+                System.out.println("Moeda que deseja converter: "+
+                        filterCoins.typeCoin(toConvertReturnFilterCoins));
+                System.out.printf("Valor a ser convertido %s %.2f \n",interaction.stringCoin(menuResponseInteraction),
+                        valueConvert);
+                System.out.printf("Valor após a conversão %s %.2f \n",
+                        interaction.stringCoin(toConvertReturnFilterCoins),
+                        conversor.
                         returnToCoinConversor(toConvertReturnFilterCoins)*valueConvert);
                 System.out.println("------------------------------");
             }catch (JsonParseException e){
@@ -60,6 +64,6 @@ public class Main {
             }
 
         }while (menuResponseInteraction<7);
-        
+
     }
 }
